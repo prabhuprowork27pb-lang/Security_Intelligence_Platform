@@ -1,0 +1,20 @@
+# Security Selfie
+
+> Enterprise security intelligence platform that turns scattered physical security operations into a measurable, defensible system across ten operating domains.
+
+Security Selfie is built for security leaders in IT/ITES, BFSI back-office, and Global Capability Centres. It provides a structured diagnostic, posture score (0–100), domain-level breakdown, risk heatmap, and a prioritised 30/60/90-day action plan. Aligned with ISO 18788 and ISO 22301, and India's DPDP Act 2023.
+
+## Pages
+
+- [Home](/): Overview of the platform and value proposition.
+- [Platform](/platform): How the diagnostic works across three steps and ten domains.
+- [Deep Dive](/deep-dive): Senior-led review and engagement model.
+- [Sample Reports](/sample): Three watermarked sample diagnostics.
+- [IT/ITES Sample](/sample/it-ites): Industry-specific sample report.
+- [BFSI Sample](/sample/bfsi): Industry-specific sample report.
+- [GCC Sample](/sample/gcc): Industry-specific sample report.
+- [Trust](/trust): Security, privacy, and regulatory commitments.
+
+## Optional
+
+- [Sign in](/auth): Authentication for assessment workspace.

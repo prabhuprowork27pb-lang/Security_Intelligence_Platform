@@ -1,0 +1,499 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* PMI-Inspired Editorial — Deep Indigo / Cream / Vibrant accent set */
+    --background: 35 40% 94%;          /* Cream Canvas #F6EFE4 */
+    --foreground: 261 70% 14%;         /* Deep Indigo ink */
+
+    --card: 0 0% 100%;
+    --card-foreground: 261 70% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 261 70% 14%;
+
+    /* Primary: Deep Indigo (PMI hero) */
+    --primary: 261 75% 11%;            /* slightly deeper indigo for contrast */
+    --primary-foreground: 40 60% 98%;  /* near-white cream for crisp text on indigo */
+    --primary-glow: 258 65% 34%;       /* Royal Violet */
+
+    /* Secondary: Electric Cyan */
+    --secondary: 195 100% 55%;         /* #1FB6FF brighter */
+    --secondary-foreground: 261 70% 14%;
+
+    /* Muted */
+    --muted: 35 30% 90%;
+    --muted-foreground: 256 20% 38%;
+
+    /* Accent: Sunrise Coral (editorial highlight) */
+    --accent: 12 100% 64%;             /* #FF6B4A */
+    --accent-foreground: 0 0% 100%;
+
+    /* Vibrant accent rotation (PMI-style) */
+    --accent-cyan: 195 100% 55%;
+    --accent-coral: 12 100% 64%;
+    --accent-lime: 78 85% 50%;
+    --accent-magenta: 320 85% 60%;
+    --accent-amber: 38 100% 58%;
+
+    /* Destructive */
+    --destructive: 5 69% 48%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders / inputs */
+    --border: 35 25% 84%;
+    --input: 35 25% 84%;
+    --ring: 195 100% 55%;
+
+    --radius: 1rem;                    /* 16px PMI rounded */
+
+    /* Gradients & shadows */
+    --gradient-hero: linear-gradient(135deg, hsl(261 78% 9%) 0%, hsl(258 65% 24%) 55%, hsl(285 55% 28%) 100%);
+    --gradient-beam: linear-gradient(120deg, transparent 50%, hsl(195 100% 55% / 0.45) 68%, hsl(320 85% 60% / 0.55) 88%, hsl(38 100% 60% / 0.35) 100%);
+    --gradient-headline: linear-gradient(92deg, hsl(40 60% 98%) 0%, hsl(195 100% 70%) 38%, hsl(320 90% 78%) 68%, hsl(40 60% 98%) 100%);
+    --shadow-editorial: 0 30px 60px -25px hsl(261 70% 14% / 0.45);
+    --shadow-soft: 0 12px 32px -16px hsl(261 70% 14% / 0.18);
+
+    /* Score colors */
+    --score-high: 145 63% 45%;
+    --score-medium: 36 95% 56%;
+    --score-low: 5 69% 48%;
+
+    /* Charts */
+    --chart-1: 261 70% 14%;
+    --chart-2: 195 100% 55%;
+    --chart-3: 145 63% 45%;
+    --chart-4: 12 100% 64%;
+    --chart-5: 320 85% 60%;
+
+    --sidebar-background: 35 40% 96%;
+    --sidebar-foreground: 256 30% 26%;
+    --sidebar-primary: 261 70% 14%;
+    --sidebar-primary-foreground: 35 40% 96%;
+    --sidebar-accent: 35 30% 90%;
+    --sidebar-accent-foreground: 261 70% 14%;
+    --sidebar-border: 35 25% 84%;
+    --sidebar-ring: 195 100% 55%;
+
+  }
+
+  .dark {
+    /* Dark Intelligence Aesthetic — deep charcoal / matte navy */
+    --background: 220 18% 6%;          /* near-black charcoal */
+    --foreground: 210 20% 96%;
+
+    --card: 220 18% 9%;                 /* matte navy surface */
+    --card-foreground: 210 20% 96%;
+
+    --popover: 220 20% 8%;
+    --popover-foreground: 210 20% 96%;
+
+    --primary: 195 78% 58%;             /* muted teal/azure glow */
+    --primary-foreground: 220 25% 6%;
+
+    --secondary: 200 70% 52%;           /* azure accent */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 15% 13%;
+    --muted-foreground: 215 12% 62%;
+
+    --accent: 160 55% 50%;              /* restrained mint */
+    --accent-foreground: 220 25% 6%;
+
+    --destructive: 5 70% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 14% 16%;              /* subtle hairline */
+    --input: 220 14% 16%;
+    --ring: 195 78% 58%;
+
+    --score-high: 160 55% 50%;
+    --score-medium: 36 92% 60%;
+    --score-low: 5 70% 52%;
+
+    --chart-1: 195 78% 58%;
+    --chart-2: 160 55% 50%;
+    --chart-3: 36 92% 60%;
+    --chart-4: 5 70% 52%;
+    --chart-5: 262 52% 60%;
+    --sidebar-background: 220 18% 7%;
+    --sidebar-foreground: 210 18% 92%;
+    --sidebar-primary: 195 78% 58%;
+    --sidebar-primary-foreground: 220 25% 6%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 210 18% 92%;
+    --sidebar-border: 220 14% 14%;
+    --sidebar-ring: 195 78% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    overflow-x: hidden;
+  }
+  html {
+    overflow-x: hidden;
+  }
+
+  /* Typography - Elite Hybrid */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  .score-display {
+    @apply font-mono;
+  }
+
+  button, [role="button"], a {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600;700&display=swap');
+
+/* SIP Score Band Color System */
+:root {
+  --saass-vulnerable: #D72638;
+  --saass-emerging: #F4A261;
+  --saass-effective: #2A9D8F;
+  --saass-proactive: #2B9348;
+  --saass-text-dark: #0D162A;
+  --saass-white: #FFFFFF;
+  --saass-muted: #E8ECEF;
+  --saass-bg: #F7F8F9;
+}
+
+/* Cinematic landing animations */
+@layer utilities {
+  @keyframes aurora-drift {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.55; }
+    50% { transform: translate3d(4%, -3%, 0) scale(1.08); opacity: 0.8; }
+  }
+  @keyframes aurora-drift-2 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); opacity: 0.45; }
+    50% { transform: translate3d(-5%, 4%, 0) scale(1); opacity: 0.7; }
+  }
+  @keyframes float-y {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes float-y-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
+  }
+  @keyframes radar-sweep {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    80%, 100% { transform: scale(1.6); opacity: 0; }
+  }
+  @keyframes scan-line {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(2400%); }
+  }
+  @keyframes shimmer-text {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes count-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes grid-drift {
+    0% { background-position: 0 0; }
+    100% { background-position: 48px 48px; }
+  }
+  .animate-aurora { animation: aurora-drift 14s ease-in-out infinite; }
+  .animate-aurora-2 { animation: aurora-drift-2 18s ease-in-out infinite; }
+  .animate-float { animation: float-y 6s ease-in-out infinite; }
+  .animate-float-slow { animation: float-y-slow 9s ease-in-out infinite; }
+  .animate-radar { animation: radar-sweep 6s linear infinite; transform-origin: center; }
+  .animate-pulse-ring { animation: pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite; }
+  .animate-scan { animation: scan-line 4s linear infinite; }
+  .animate-shimmer {
+    background-size: 200% auto;
+    animation: shimmer-text 6s linear infinite;
+  }
+  .animate-grid-drift { animation: grid-drift 30s linear infinite; }
+
+  /* Hero headline — bulletproof crisp cream + soft glow on dark indigo */
+  .hero-headline-solid {
+    color: hsl(40 60% 99%) !important;
+    text-shadow:
+      0 2px 28px hsl(261 78% 6% / 0.65),
+      0 1px 0 hsl(261 78% 6% / 0.45),
+      0 0 1px hsl(261 78% 6% / 0.4);
+    -webkit-font-smoothing: antialiased;
+  }
+  .hero-headline-gradient {
+    background-image: var(--gradient-headline);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: shimmer-text 9s linear infinite;
+    filter: drop-shadow(0 2px 18px hsl(195 100% 55% / 0.3)) drop-shadow(0 1px 0 hsl(261 78% 6% / 0.55));
+  }
+
+  /* PMI-style eyebrow chip on cream sections */
+  .pmi-eyebrow {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-foreground/5 border border-border/60 text-[11px] font-semibold uppercase tracking-[0.22em];
+  }
+
+  /* PMI vibrant gradient pill — primary CTA on every page */
+  .pmi-cta-gradient {
+    background: linear-gradient(92deg, hsl(195 100% 50%) 0%, hsl(320 85% 60%) 60%, hsl(12 100% 64%) 100%);
+    color: #fff;
+    border: 0;
+  }
+}
+
+
+/* Premium card hover effects */
+@layer components {
+  .premium-card {
+    @apply rounded-xl bg-card shadow-sm transition-all duration-300;
+  }
+
+  .premium-card:hover {
+    @apply shadow-lg -translate-y-1;
+  }
+
+  .score-gauge {
+    @apply relative inline-flex items-center justify-center rounded-full;
+  }
+
+  /* Score Band Badge Styles */
+  .saass-badge {
+    @apply inline-flex items-center justify-center rounded-full font-semibold transition-all;
+    padding: 0.375rem 0.75rem;
+  }
+
+  .saass-badge--vulnerable {
+    background-color: var(--saass-vulnerable);
+    color: var(--saass-white);
+  }
+
+  .saass-badge--emerging {
+    background-color: var(--saass-emerging);
+    color: var(--saass-text-dark);
+  }
+
+  .saass-badge--effective {
+    background-color: var(--saass-effective);
+    color: var(--saass-white);
+  }
+
+  .saass-badge--proactive {
+    background-color: var(--saass-proactive);
+    color: var(--saass-white);
+  }
+
+  .saass-badge--unknown {
+    background-color: #95A5A6;
+    color: var(--saass-white);
+  }
+
+  /* Risk Heatmap Cell */
+  .saass-heatmap-cell {
+    width: 72px;
+    height: 40px;
+    min-width: 72px;
+    min-height: 40px;
+    @apply rounded-md flex items-center justify-center transition-all duration-200;
+  }
+
+  .saass-heatmap-cell:hover {
+    @apply scale-105 shadow-md;
+  }
+}
+
+/* PDF Report Print-safe CSS */
+@media print {
+  /* Ensure report containers are visible for print */
+  #report-root, .report-container, .report-page, .report-body {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  /* Prevent hiding content */
+  *[data-print-hide="true"] { display: none !important; }
+  /* Keep table headers on page breaks */
+  thead { display: table-header-group; }
+  /* Avoid breaking inside key cards */
+  .card, .domain-card, .roadmap-card, .heatmap-row, .report-section, .page-break-inside-avoid { 
+    page-break-inside: avoid; 
+  }
+  /* Tidy fonts for print */
+  body { 
+    font-size: 12.5px; 
+    line-height: 1.28; 
+    color: #0D162A; 
+    background: #FFFFFF !important; 
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* Slightly reduce heavy shadows which may not print well */
+  .card, .report-card { 
+    box-shadow: none !important; 
+    border: 1px solid #E8ECEF; 
+  }
+  /* Hide no-print elements */
+  .no-print { display: none !important; }
+  /* Page break rules */
+  .page-break { page-break-after: always; }
+  @page { 
+    margin: 18mm 20mm; 
+    size: A4 portrait; 
+  }
+}
+
+/* Defensive rule: if anything was set to hide report on print, override it */
+@media print {
+  [style*="display:none"] { display: block !important; }
+  [style*="visibility:hidden"] { visibility: visible !important; }
+}
+
+/* ---- Confidential / traceability layer ---------------------------------- */
+/* Soft blur of sensitive surfaces when the tab is backgrounded.
+   Opt in by adding the .confidential-surface class to a wrapper. */
+body.tab-hidden .confidential-surface {
+  filter: blur(6px);
+  transition: filter 200ms ease-in-out;
+}
+body.tab-hidden .confidential-surface::after {
+  content: "Confidential content – return to continue";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Poppins, system-ui, sans-serif;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  background: hsl(var(--background) / 0.4);
+  pointer-events: none;
+}
+.confidential-surface { position: relative; }
+
+/* Hide the floating watermark chip & diagonal overlay in print views,
+   the PDF report has its own dedicated footer. */
+@media print {
+  .confidential-watermark-overlay { display: none !important; }
+}
+
+/* ---- Mobile ergonomics ----------------------------------------------- */
+/* Prevent iOS Safari from zooming when focusing form fields (<16px font). */
+@media (max-width: 767px) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* Safe-area utilities */
+.safe-pb { padding-bottom: max(env(safe-area-inset-bottom), 0.75rem); }
+.safe-pt { padding-top: max(env(safe-area-inset-top), 0.5rem); }
+
+/* Comfortable thumb-target helper */
+.tap-target { min-height: 44px; min-width: 44px; }
+
+/* Smoother momentum scrolling on iOS */
+html, body { -webkit-overflow-scrolling: touch; }
+
+/* ---- PMI-inspired enterprise utilities (additive) -------------------- */
+.pmi-section { padding-top: 3rem; padding-bottom: 3rem; }
+@media (min-width: 768px) {
+  .pmi-section { padding-top: 4rem; padding-bottom: 4rem; }
+}
+.pmi-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: hsl(var(--secondary));
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+.pmi-card {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.875rem;
+  padding: 1.5rem;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.pmi-card:hover { box-shadow: 0 8px 28px -16px hsl(var(--primary) / 0.25); }
+.pmi-divider {
+  height: 3px; width: 56px; border-radius: 2px;
+  background: linear-gradient(90deg, hsl(var(--secondary)), hsl(var(--primary)));
+  margin-top: 0.75rem; margin-bottom: 1rem;
+}
+
+/* Brand progress bar — clearly visible track + indicator */
+.pmi-progress-track { background: hsl(220 14% 92%) !important; }
+.dark .pmi-progress-track { background: hsl(220 14% 22%) !important; }
+.pmi-progress-indicator {
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary))) !important;
+  box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.25);
+}
+.pmi-progress-indicator[data-complete="true"] {
+  background: hsl(142 71% 45%) !important;
+}
+
+/* Validation outline for unanswered questions */
+.pmi-question-invalid {
+  outline: 2px solid hsl(0 84% 60%);
+  outline-offset: 6px;
+  border-radius: 12px;
+  scroll-margin-top: 140px;
+}
+
+/* ───────────────── Landing-only dark theming (Item J) ─────────────────
+   Scoped to the public `/` Landing page via .landing-dark wrapper.
+   Re-points semantic tokens to a deep-indigo dark palette so existing
+   Tailwind classes (bg-background, bg-card, text-muted-foreground,
+   border-border, text-primary, etc.) render coherently on dark
+   without changing any other route. */
+.landing-dark {
+  --background: 258 40% 7%;
+  --foreground: 0 0% 96%;
+  --card: 258 30% 13%;
+  --card-foreground: 0 0% 96%;
+  --popover: 258 35% 10%;
+  --popover-foreground: 0 0% 96%;
+  --muted: 258 30% 16%;
+  --muted-foreground: 220 14% 75%;
+  --border: 258 25% 22%;
+  --input: 258 25% 22%;
+  --primary: 195 95% 60%;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+/* Tighten hero headline gradient to a single off-white → azure ramp */
+.landing-dark .hero-headline-gradient {
+  background-image: linear-gradient(92deg, hsl(40 60% 99%) 0%, hsl(195 100% 78%) 100%);
+  filter: drop-shadow(0 2px 18px hsl(195 100% 55% / 0.28)) drop-shadow(0 1px 0 hsl(261 78% 6% / 0.5));
+}
+/* Restrained 2-stop accent CTA on landing (drops the third orange stop) */
+.landing-dark .pmi-cta-gradient {
+  background: linear-gradient(92deg, hsl(195 100% 55%) 0%, hsl(285 75% 60%) 100%);
+}
+
+
+

@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "bands": [
+    {
+      "id": "vulnerable",
+      "label": "VULNERABLE",
+      "min": 0,
+      "max": 40,
+      "color": "#D72638",
+      "textColor": "#FFFFFF",
+      "description": "Critical security gaps requiring immediate attention"
+    },
+    {
+      "id": "emerging",
+      "label": "EMERGING",
+      "min": 41,
+      "max": 70,
+      "color": "#F4A261",
+      "textColor": "#0D162A",
+      "description": "Basic controls in place but significant improvements needed"
+    },
+    {
+      "id": "effective",
+      "label": "EFFECTIVE",
+      "min": 71,
+      "max": 85,
+      "color": "#2A9D8F",
+      "textColor": "#FFFFFF",
+      "description": "Well-established security practices with room for optimization"
+    },
+    {
+      "id": "proactive",
+      "label": "PROACTIVE",
+      "min": 86,
+      "max": 100,
+      "color": "#2B9348",
+      "textColor": "#FFFFFF",
+      "description": "Industry-leading security posture with continuous improvement"
+    }
+  ]
+}

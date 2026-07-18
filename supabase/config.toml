@@ -1,0 +1,43 @@
+project_id = "qtffnxyrrqumcixrikaa"
+
+[functions]
+  [functions.ask-saass]
+    verify_jwt = true
+  [functions.auth-email-hook]
+    verify_jwt = false
+  [functions.calculate-scores]
+    verify_jwt = true
+  [functions.generate-insights]
+    verify_jwt = true
+  [functions.generate-pdf]
+    verify_jwt = true
+  [functions.process-email-queue]
+    verify_jwt = true
+  [functions.pulse-ingest]
+    verify_jwt = true
+  [functions.razorpay-create-order]
+    verify_jwt = true
+  [functions.razorpay-verify-payment]
+    verify_jwt = true
+  [functions.capture-lead]
+    verify_jwt = false
+  [functions.send-transactional-email]
+    verify_jwt = true
+  [functions.preview-transactional-email]
+    verify_jwt = false
+  [functions.handle-email-unsubscribe]
+    verify_jwt = false
+  [functions.handle-email-suppression]
+    verify_jwt = false
+  [functions.generate-report-on-submit]
+    verify_jwt = true
+  [functions.approve-and-send-report]
+    verify_jwt = true
+  [functions.admin-trigger-pulse-ingest]
+    verify_jwt = true
+  [functions.admin-get-report-signed-url]
+    verify_jwt = true
+  [functions.get-report-download-url]
+    verify_jwt = true
+  [functions.generate-validated-report]
+    verify_jwt = false

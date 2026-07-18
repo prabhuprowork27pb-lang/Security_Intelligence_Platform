@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.pulse_rotate_expired() FROM authenticated;
