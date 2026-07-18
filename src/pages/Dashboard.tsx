@@ -28,6 +28,7 @@ import SeverityLegend from "@/components/SeverityLegend";
 import AiOrchestrationStrip from "@/components/AiOrchestrationStrip";
 import PredictiveIntelligence from "@/components/PredictiveIntelligence";
 import AssessmentQuotaBadge from "@/components/AssessmentQuotaBadge";
+import BackToHome from "@/components/BackToHome";
 
 interface Organisation {
   id: string;
@@ -233,6 +234,12 @@ const Dashboard = () => {
           </div>
         </div>
       </header>
+
+      <div className="border-b border-border/30 bg-muted/20">
+        <div className="container mx-auto px-4 md:px-6 py-1.5">
+          <BackToHome />
+        </div>
+      </div>
 
       <main className="container mx-auto px-4 md:px-6 lg:px-8 py-8 lg:py-10 xl:py-12 max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1560px]">
         {!betaDismissed && (
