@@ -15,6 +15,7 @@ const SMARTY_FREE_LIMIT = 5;
 interface Message {
   role: "user" | "assistant";
   content: string;
+  isPremiumNotice?: boolean;
   pinned?: boolean;
   pinnedId?: string;
   pairedQuestion?: string;
@@ -122,7 +123,9 @@ export const AskSaassPanel = ({
         },
       });
 
-      if (error) throw error;
+      if (error || !data?.answer) {
+        throw error || new Error("No answer returned");
+      }
 
       const assistantMessage: Message = {
         role: "assistant",
@@ -134,7 +137,8 @@ export const AskSaassPanel = ({
       console.error("Error:", error);
       const errorMessage: Message = {
         role: "assistant",
-        content: "I apologize, but I encountered an error. Please try again.",
+        content: "SMARTY™ AI Security Advisor is a Premium Feature available exclusively for subscribed members.",
+        isPremiumNotice: true,
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
@@ -226,16 +230,34 @@ export const AskSaassPanel = ({
                 <div className="space-y-4">
                   {messages.map((msg, idx) => (
                     <div key={idx}>
-                      <div
-                        className={`text-sm ${
-                          msg.role === "user"
-                            ? "bg-primary text-primary-foreground p-2 rounded ml-8"
-                            : "bg-muted p-2 rounded mr-8"
-                        }`}
-                      >
-                        {msg.content}
-                      </div>
-                      {msg.role === "assistant" && msg.pairedQuestion && (
+                      {msg.isPremiumNotice ? (
+                        <div className="mr-6 my-2 rounded-xl border border-amber-500/40 bg-amber-500/[0.08] p-4 space-y-2.5 shadow-sm">
+                          <div className="flex items-center gap-2">
+                            <div className="p-1 rounded bg-amber-500/20 text-amber-500">
+                              <Lock className="h-4 w-4" />
+                            </div>
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-amber-500">
+                              🔒 SMARTY™ Premium Feature
+                            </span>
+                          </div>
+                          <p className="text-xs font-semibold text-foreground leading-snug">
+                            Interactive AI Security Advisor is reserved exclusively for subscribed members.
+                          </p>
+                          <p className="text-[11px] text-muted-foreground leading-relaxed">
+                            Upgrade your organization plan or request a Security Studio™ engagement to unlock full AI consulting analysis.
+                          </p>
+                        </div>
+                      ) : (
+                        <div
+                          className={`text-sm ${msg.role === "user"
+                              ? "bg-primary text-primary-foreground p-2 rounded ml-8"
+                              : "bg-muted p-2 rounded mr-8"
+                            }`}
+                        >
+                          {msg.content}
+                        </div>
+                      )}
+                      {msg.role === "assistant" && !msg.isPremiumNotice && msg.pairedQuestion && (
                         <>
                           <div className="mr-8">
                             <SmartyActionCards answer={msg.content} />

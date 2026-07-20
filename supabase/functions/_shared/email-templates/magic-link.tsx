@@ -47,7 +47,9 @@ export const MagicLinkEmail = ({ confirmationUrl, token }: MagicLinkEmailProps) 
         </Text>
         <Section style={{ textAlign: 'center' as const, margin: '0 0 24px' }}>
           <Button style={button} href={confirmationUrl}>
-            Sign in with one click
+            <span style={{ color: '#ffffff', textDecoration: 'none', fontWeight: 700 }}>
+              Sign in with one click →
+            </span>
           </Button>
         </Section>
         <Text style={footer}>
@@ -70,13 +72,13 @@ const main = { backgroundColor: '#ffffff', fontFamily: 'Inter, "Helvetica Neue",
 const container = { padding: '32px 28px', maxWidth: '560px' }
 const brandBar = { borderBottom: '1px solid #e5e7eb', paddingBottom: '16px', marginBottom: '28px' }
 const wordmark = { fontFamily: 'Poppins, "Helvetica Neue", Arial, sans-serif', fontSize: '15px', fontWeight: 700 as const, color: '#0D162A', letterSpacing: '-0.01em', margin: 0 }
-const strapline = { fontSize: '10px', color: '#1877F2', letterSpacing: '0.18em', textTransform: 'uppercase' as const, fontWeight: 600 as const, margin: '4px 0 0' }
+const strapline = { fontSize: '10px', color: '#0284C7', letterSpacing: '0.18em', textTransform: 'uppercase' as const, fontWeight: 600 as const, margin: '4px 0 0' }
 const h1 = { fontFamily: 'Poppins, "Helvetica Neue", Arial, sans-serif', fontSize: '22px', fontWeight: 700 as const, color: '#0D162A', margin: '0 0 16px', letterSpacing: '-0.01em' }
 const text = { fontSize: '15px', color: '#334155', lineHeight: '1.6', margin: '0 0 24px' }
 const smallText = { fontSize: '13px', color: '#64748b', lineHeight: '1.5', margin: '0 0 12px' }
 const otpLabel = { fontSize: '11px', color: '#64748b', textTransform: 'uppercase' as const, letterSpacing: '0.18em', fontWeight: 600 as const, margin: '0 0 8px' }
 const otpCode = { fontFamily: '"SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace', fontSize: '36px', fontWeight: 700 as const, color: '#0D162A', letterSpacing: '0.32em', margin: '0 0 4px', padding: '14px 18px', backgroundColor: '#f1f5f9', border: '1px solid #e2e8f0', borderRadius: '10px', display: 'inline-block' }
-const button = { backgroundColor: '#1877F2', color: '#ffffff', fontSize: '14px', fontWeight: 600 as const, borderRadius: '8px', padding: '13px 24px', textDecoration: 'none', display: 'inline-block' }
+const button = { backgroundColor: '#0284C7', color: '#ffffff !important', fontSize: '14px', fontWeight: 700 as const, borderRadius: '10px', padding: '14px 32px', textDecoration: 'none !important', display: 'inline-block', boxShadow: '0 4px 14px rgba(2, 132, 199, 0.35)' }
 const hr = { borderColor: '#e5e7eb', margin: '24px 0' }
 const footer = { fontSize: '12px', color: '#64748b', lineHeight: '1.5', margin: '0 0 12px' }
 const confidential = { fontSize: '11px', color: '#94a3b8', margin: 0, letterSpacing: '0.02em' }

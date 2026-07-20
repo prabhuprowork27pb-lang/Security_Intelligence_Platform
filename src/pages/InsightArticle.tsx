@@ -225,22 +225,22 @@ const Paywall = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
           archive.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3">
-          <Button asChild size="lg" className="min-h-[48px]">
+        <div className="flex flex-row flex-wrap sm:flex-nowrap items-center gap-2 md:gap-3">
+          <Button asChild className="h-10 md:h-11 px-3.5 md:px-4  font-semibold text-xs md:text-sm whitespace-nowrap shrink-0 border-none transition-colors">
             <Link to="/diagnostic/start">
               Run a Security Selfie™
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <ArrowRight className="ml-1.5 h-3.5 w-3.5 md:h-4 md:w-4 shrink-0 text-slate-950" />
             </Link>
           </Button>
           <StudioInquiryDialog
             trigger={
-              <Button size="lg" variant="outline" className="min-h-[48px]">
+              <Button variant="outline" className="h-10 md:h-11 px-3.5 md:px-4 text-xs md:text-sm font-semibold whitespace-nowrap shrink-0">
                 Engage Security Studio™
               </Button>
             }
           />
           {!isAuthenticated && (
-            <Button asChild size="lg" variant="ghost" className="min-h-[48px]">
+            <Button asChild variant="ghost" className="h-10 md:h-11 px-3 md:px-3.5 text-xs md:text-sm text-muted-foreground bg-[#39C697] text-slate-950 hover:bg-[#2eb084] whitespace-nowrap shrink-0">
               <Link to="/auth">Already a subscriber? Sign in</Link>
             </Button>
           )}

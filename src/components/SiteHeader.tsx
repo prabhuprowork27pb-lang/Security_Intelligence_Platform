@@ -81,7 +81,7 @@ export const SiteHeader = ({ homeHash }: SiteHeaderProps) => {
               <span className="hidden sm:inline">Security Intelligence Platform</span>
               <sup className="text-[9px] font-medium text-secondary ml-0.5">™</sup>
             </span>
-            <span className="hidden sm:inline text-[10px] uppercase tracking-[0.28em] text-secondary font-semibold -mt-0.5 truncate">
+            <span className="hidden sm:inline text-[10px] uppercase tracking-[0.28em] text-secondary font-semibold -mt-0.5 whitespace-nowrap">
               {BRAND.shortTm} · {BRAND.shortMeaning}
             </span>
           </div>
@@ -93,7 +93,7 @@ export const SiteHeader = ({ homeHash }: SiteHeaderProps) => {
             {CORE_TABS.map((t) => {
               const active = !t.external && isActive(t.to);
               const linkClass = cn(
-                "group relative px-2.5 py-2.5 text-[13px] font-medium tracking-tight whitespace-nowrap transition-colors",
+                "group relative px-2 py-2.5 text-[13px] font-medium tracking-tight whitespace-nowrap transition-colors",
                 active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
               );
               const underline = (
@@ -119,12 +119,12 @@ export const SiteHeader = ({ homeHash }: SiteHeaderProps) => {
               );
             })}
 
-            <DropdownMenu>
+            <DropdownMenu modal={false}>
               <DropdownMenuTrigger asChild>
                 <button
                   type="button"
                   className={cn(
-                    "group relative inline-flex items-center gap-1 px-2.5 py-2.5 text-[13px] font-medium tracking-tight whitespace-nowrap transition-colors outline-none",
+                    "group relative inline-flex items-center gap-1 px-2 py-2.5 text-[13px] font-medium tracking-tight whitespace-nowrap transition-colors outline-none",
                     MORE_TABS.some((t) => isActive(t.to))
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground",
@@ -187,7 +187,7 @@ export const SiteHeader = ({ homeHash }: SiteHeaderProps) => {
               variant="ghost"
               size="sm"
               onClick={handleSignOut}
-              className="inline-flex text-[13px] text-muted-foreground hover:text-foreground mr-3 md:mr-12"
+              className="inline-flex text-[13px] text-muted-foreground hover:text-foreground mr-3 md:mr-0"
             >
               <LogOut className="mr-2 h-4 w-4" /> Sign out
             </Button>
@@ -196,7 +196,7 @@ export const SiteHeader = ({ homeHash }: SiteHeaderProps) => {
               variant="outline"
               size="sm"
               onClick={() => navigate("/auth")}
-              className="inline-flex text-[13px] text-muted-foreground hover:text-foreground border-border/80 mr-3 md:mr-12"
+              className="inline-flex text-[13px] text-muted-foreground hover:text-foreground border-border/80 mr-3 md:mr-0"
             >
               <LogIn className="mr-2 h-4 w-4" /> Sign In
             </Button>

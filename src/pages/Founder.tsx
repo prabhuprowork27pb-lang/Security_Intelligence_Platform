@@ -66,11 +66,6 @@ const ANCHORS = [
       "Enterprise-scale physical security, BCM, and integrated risk programs across IT/ITES, manufacturing, and critical environments.",
   },
   {
-    title: "Advisory at scale",
-    body:
-      "Formerly VP — Risk Management & Technology Services at IIRIS Consulting. Advised boards, CISOs, and security heads on regulatory risk and enterprise resilience.",
-  },
-  {
     title: "Founder, SIP™",
     body:
       "Building the democratisation layer — elite consulting intelligence, delivered to every site, every shift, every leader who carries the risk.",
@@ -123,7 +118,7 @@ const Founder = () => (
     <section className="container mx-auto px-5 md:px-6 pt-14 lg:pt-20 pb-14 lg:pb-20 max-w-6xl">
       <div className="grid lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-14 items-center">
         <div>
-          <div className="mb-4"><BetaPill variant="light" label="Founder · Invite-only preview" /></div>
+          <div className="mb-4"><BetaPill variant="light" label="Feedback Cohort" /></div>
           <p className="text-[11px] uppercase tracking-[0.22em] text-secondary font-semibold mb-4">
             Founder
           </p>
@@ -191,14 +186,7 @@ const Founder = () => (
         <div>
           <p className="font-mono text-[11px] text-secondary mb-3">01 · THE PATH</p>
           <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
-            Twenty-three years across enterprise security, business continuity,
-            and integrated risk — most recently as VP for Risk Management &
-            Technology Services at IIRIS Consulting. Before that, accountable
-            for security operations across Google India and G4S engagements,
-            the Department of Atomic Energy, and a foundation in the Indian
-            Army. The thread through all of it: practitioner work. Walking
-            sites, reading rosters, sitting with site supervisors, and making
-            programmes that actually hold up on a Monday morning.
+            Founded SIP™ to close a gap I spent 23 years watching widen — the distance between polished security frameworks on paper and what actually holds up on the ground. SIP™ gives security leaders a structured diagnostic across 10 domains — governance, perimeter, guarding operations, electronic security, crisis continuity, and more — producing a defensible posture score and board-ready intelligence report. The entry point is the Security Selfie™ and for leaders needing deeper validation, Security Studio™ offers a senior-led, on-ground engagement.
           </p>
         </div>
 
@@ -244,7 +232,7 @@ const Founder = () => (
       <h2 className="font-heading text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-12 max-w-3xl">
         Built from the inside — uniform, boardroom, and ground.
       </h2>
-      <div className="grid md:grid-cols-2 gap-5 md:gap-6">
+      <div className="grid md:grid-cols-3 gap-5 md:gap-6">
         {ANCHORS.map((a) => (
           <Card key={a.title} className="border-border/60">
             <CardContent className="p-7">
@@ -291,7 +279,7 @@ const Founder = () => (
         Talk to me directly.
       </h3>
       <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-        Beta is invited preview. If you lead security at a site, a region, or an
+        If you lead security at a site, a region, or an
         enterprise — I want your feedback, your scepticism, and your stories.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">

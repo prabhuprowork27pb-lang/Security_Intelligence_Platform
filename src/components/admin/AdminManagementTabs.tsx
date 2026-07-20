@@ -20,6 +20,7 @@ interface AssessmentRow { id: string; created_by_name: string; status: string | 
 interface LeadRow { id: string; name: string; email: string; phone: string | null; message: string | null; status: string | null; created_at: string | null; }
 interface PaymentRow { id: string; user_id: string; amount_inr: number; status: string; created_at: string; }
 interface BetaTester { user_id: string; email: string; created_at: string; }
+interface PulseSubscriberRow { id: string; email: string | null; phone: string | null; channel: string; source: string | null; created_at: string; }
 
 const AdminManagementTabs = () => {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const AdminManagementTabs = () => {
   const [assessments, setAssessments] = useState<AssessmentRow[]>([]);
   const [leads, setLeads] = useState<LeadRow[]>([]);
   const [payments, setPayments] = useState<PaymentRow[]>([]);
+  const [subscribers, setSubscribers] = useState<PulseSubscriberRow[]>([]);
   const [price, setPrice] = useState<number>(4999);
   const [savingPrice, setSavingPrice] = useState(false);
   const [betaTesters, setBetaTesters] = useState<BetaTester[]>([]);
@@ -82,17 +84,19 @@ const AdminManagementTabs = () => {
 
   useEffect(() => {
     (async () => {
-      const [rolesRes, aRes, lRes, pRes, pricing] = await Promise.all([
+      const [rolesRes, aRes, lRes, pRes, pricing, subsRes] = await Promise.all([
         supabase.from("user_roles" as any).select("user_id, role"),
         supabase.from("assessments").select("id, created_by_name, status, paid, created_at, overall_score_0_100, site_id, user_id, review_status, reviewed_by_name" as any).order("created_at", { ascending: false }),
         supabase.from("dslr_leads").select("id, name, email, phone, message, status, created_at").order("created_at", { ascending: false }),
         supabase.from("payments" as any).select("id, user_id, amount_inr, status, created_at").order("created_at", { ascending: false }),
         fetchPricing(),
+        supabase.from("intelligence_pulse_subscribers" as any).select("*").order("created_at", { ascending: false }),
       ]);
       setRoles(((rolesRes.data ?? []) as any) as RoleRow[]);
       setAssessments(((aRes.data ?? []) as any) as AssessmentRow[]);
       setLeads(((lRes.data ?? []) as any) as LeadRow[]);
       setPayments(((pRes.data ?? []) as any) as PaymentRow[]);
+      setSubscribers(((subsRes.data ?? []) as any) as PulseSubscriberRow[]);
       setPrice(pricing.assessment_price_inr);
       setLoading(false);
       loadBetaTesters();
@@ -174,6 +178,7 @@ const AdminManagementTabs = () => {
         <TabsList className="h-auto flex w-full flex-wrap justify-start gap-1 bg-muted/60 p-1 md:w-auto">
           <TabsTrigger value="roles">Users & Roles</TabsTrigger>
           <TabsTrigger value="beta" className="data-[state=active]:text-primary">Beta Testers</TabsTrigger>
+          <TabsTrigger value="subscribers">Subscribers ({subscribers.length})</TabsTrigger>
           <TabsTrigger value="reports">Reports</TabsTrigger>
           <TabsTrigger value="queue">Reports queue</TabsTrigger>
           <TabsTrigger value="payments">Payments</TabsTrigger>
@@ -412,6 +417,56 @@ const AdminManagementTabs = () => {
 
         <TabsContent value="queue" className="mt-6">
           <ReportsQueueTab />
+        </TabsContent>
+
+        <TabsContent value="subscribers" className="mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Intelligence Pulse™ Subscribers</CardTitle>
+              <p className="text-sm text-muted-foreground">
+                All email and WhatsApp subscribers for the weekly operational intelligence brief.
+              </p>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Email / Phone</TableHead>
+                    <TableHead>Channel</TableHead>
+                    <TableHead>Source</TableHead>
+                    <TableHead className="text-right">Subscribed Date</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {subscribers.length === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={4} className="py-8 text-center text-muted-foreground">
+                        No weekly brief subscribers yet
+                      </TableCell>
+                    </TableRow>
+                  )}
+                  {subscribers.map((s) => (
+                    <TableRow key={s.id}>
+                      <TableCell className="font-medium font-mono text-sm">
+                        {s.email || s.phone || "—"}
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className="capitalize">
+                          {s.channel}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-xs text-muted-foreground">
+                        {s.source || "community"}
+                      </TableCell>
+                      <TableCell className="text-right text-xs text-muted-foreground">
+                        {s.created_at ? new Date(s.created_at).toLocaleDateString() : "—"}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
         </TabsContent>
 
         <TabsContent value="pulse" className="mt-6">

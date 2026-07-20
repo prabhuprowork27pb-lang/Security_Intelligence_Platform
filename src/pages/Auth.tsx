@@ -33,6 +33,9 @@ const BrandMark = () => (
 const emailSchema = z.string().email('Please enter a valid email address');
 const passwordSchema = z.string().min(6, 'Password must be at least 6 characters');
 
+// Feature flag: set to true when SMS provider is configured & active
+const ENABLE_MOBILE_OTP = false;
+
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -49,13 +52,15 @@ const Auth = () => {
   const [resendCountdown, setResendCountdown] = useState(0);
   const [verifying, setVerifying] = useState(false);
 
-  // Mobile OTP flow state
+  // Mobile OTP flow state (preserved for future SMS provider integration)
   const [mobile, setMobile] = useState('');
   const [mobileOtpSent, setMobileOtpSent] = useState(false);
   const [mobileOtpValue, setMobileOtpValue] = useState('');
   const [mobileLoading, setMobileLoading] = useState(false);
   const [mobileVerifying, setMobileVerifying] = useState(false);
   const [mobileResendCountdown, setMobileResendCountdown] = useState(0);
+
+
 
   // WhatsApp capture interstitial
   const [showMobileCapture, setShowMobileCapture] = useState(false);
@@ -111,6 +116,8 @@ const Auth = () => {
     return () => clearTimeout(t);
   }, [mobileResendCountdown]);
 
+
+
   const handleGoogle = async () => {
     setOauthLoading(true);
     try {
@@ -137,7 +144,9 @@ const Auth = () => {
     }
   };
 
-  // Mobile (Indian +91) OTP flow
+
+
+  // Mobile (Indian +91) OTP flow handlers (ready for SMS provider integration)
   const sendMobileCode = async (e164: string) => {
     const { error } = await supabase.auth.signInWithOtp({
       phone: e164,
@@ -447,44 +456,41 @@ const Auth = () => {
             <span className="absolute inset-0 -top-2 mx-auto w-fit bg-card px-2 text-xs text-muted-foreground">or</span>
           </div>
 
-          <Tabs defaultValue="mobile" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="mobile">Mobile OTP</TabsTrigger>
+          <Tabs defaultValue="otp" className="w-full">
+            <TabsList className={ENABLE_MOBILE_OTP ? "grid w-full grid-cols-3" : "grid w-full grid-cols-2"}>
+              {ENABLE_MOBILE_OTP && <TabsTrigger value="mobile">Mobile OTP</TabsTrigger>}
               <TabsTrigger value="otp">Email code</TabsTrigger>
               <TabsTrigger value="password">Password</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="mobile">
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="mobile-number">Mobile number</Label>
-                  <div className="flex">
-                    <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-input bg-muted text-sm text-muted-foreground select-none">
-                      +91
-                    </span>
-                    <Input
-                      id="mobile-number"
-                      type="tel"
-                      inputMode="numeric"
-                      maxLength={10}
-                      placeholder="10-digit mobile"
-                      className="rounded-l-none"
-                      value={mobile}
-                      onChange={(e) => setMobile(e.target.value.replace(/\D/g, '').slice(0, 10))}
-                      disabled
-                    />
+            {ENABLE_MOBILE_OTP && (
+              <TabsContent value="mobile">
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="mobile-number">Mobile number</Label>
+                    <div className="flex">
+                      <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-input bg-muted text-sm text-muted-foreground select-none">
+                        +91
+                      </span>
+                      <Input
+                        id="mobile-number"
+                        type="tel"
+                        inputMode="numeric"
+                        maxLength={10}
+                        placeholder="10-digit mobile"
+                        className="rounded-l-none"
+                        value={mobile}
+                        onChange={(e) => setMobile(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                        disabled={mobileLoading}
+                      />
+                    </div>
                   </div>
+                  <Button type="button" onClick={handleSendMobileOtp} className="w-full" disabled={mobileLoading || mobile.length < 10}>
+                    <Smartphone className="mr-2 h-4 w-4" />Send OTP
+                  </Button>
                 </div>
-                <Button type="button" className="w-full" disabled>
-                  <Smartphone className="mr-2 h-4 w-4" />Send OTP
-                </Button>
-                <div className="rounded-md border border-secondary/30 bg-secondary/5 px-3 py-2 text-xs text-muted-foreground">
-                  Mobile OTP sign-in is rolling out shortly. For now, please use
-                  <span className="font-medium text-foreground"> Email code </span>
-                  or <span className="font-medium text-foreground">Continue with Google</span> above.
-                </div>
-              </div>
-            </TabsContent>
+              </TabsContent>
+            )}
 
 
 

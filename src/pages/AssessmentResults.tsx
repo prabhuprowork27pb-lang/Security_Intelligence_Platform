@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
-import { ArrowLeft, Sparkles, FileText, MessageSquare, AlertTriangle, Home, BookOpen, Share2, Clock, CheckCircle2, Loader2 } from "lucide-react";
+import { ArrowLeft, Sparkles, FileText, MessageSquare, AlertTriangle, Home, BookOpen, Clock, CheckCircle2, Loader2 } from "lucide-react";
 import { getScoreBand, SAASS_SCORE_BANDS } from "@/lib/scoring";
 import { ScoreBadge } from "@/components/ScoreBadge";
 import { getDomainIcon } from "@/lib/domainIcons";
@@ -297,14 +297,6 @@ const AssessmentResults = () => {
                 <Home className="mr-2 h-4 w-4" />
                 Home
               </Button>
-              <Button
-                variant="ghost"
-                onClick={() => navigate(-1)}
-                className="text-primary-foreground hover:bg-primary-foreground/10"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back
-              </Button>
               <div className="border-l border-primary-foreground/20 pl-4 flex items-center gap-3">
                 <IntelligenceLogo size={28} className="text-primary-foreground" />
                 <div className="leading-tight">
@@ -566,8 +558,8 @@ const AssessmentResults = () => {
               <Card className="p-6">
                 <h3 className="text-lg font-heading font-semibold mb-4">Domain Scores</h3>
                 <p className="text-xs text-muted-foreground mb-4">Performance across security domains (0-100 scale)</p>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={domainScores}>
+                <ResponsiveContainer width="100%" height={320}>
+                  <BarChart data={domainScores} margin={{ top: 20, right: 10, left: -10, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                     <XAxis
                       dataKey="domain_key"
@@ -576,7 +568,11 @@ const AssessmentResults = () => {
                       textAnchor="end"
                       height={100}
                     />
-                    <YAxis domain={[0, 100]} tick={{ fill: "hsl(var(--muted-foreground))" }} />
+                    <YAxis
+                      domain={[0, 110]}
+                      ticks={[0, 25, 50, 75, 100]}
+                      tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 11 }}
+                    />
                     <Tooltip
                       contentStyle={{
                         backgroundColor: "hsl(var(--card))",
@@ -673,6 +669,7 @@ const AssessmentResults = () => {
                             size="sm"
                             variant={domain.score_0_100 < 71 ? "default" : "outline"}
                             onClick={() => askSmartyAbout(domain.domain_name, domain.score_0_100)}
+
                           >
                             <MessageSquare className="mr-2 h-4 w-4" />
                             Ask SMARTY about {domain.domain_name}
@@ -759,34 +756,12 @@ const AssessmentResults = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-3">
-              <Button onClick={() => setDslrFormOpen(true)} className="flex-1 h-auto py-3" size="lg">
+              <Button onClick={() => setDslrFormOpen(true)} className="w-full h-auto py-3" size="lg">
                 <FileText className="mr-2 h-5 w-5" />
                 <div className="text-left">
                   <div className="font-semibold">Request Security Studio™ Engagement</div>
                   <div className="text-xs opacity-90">Senior-led, on-ground deep validation</div>
                 </div>
-              </Button>
-              <Button
-                onClick={() => {
-                  const url = `${window.location.origin}/assessments/${id}`;
-                  navigator.clipboard.writeText(url).then(() => {
-                    toast({
-                      title: "Link copied ✓",
-                      description:
-                        "Paste this link in WhatsApp to share your report with your manager or team.",
-                    });
-                  }).catch(() => {
-                    toast({
-                      title: "Copy the link from your browser address bar",
-                      description: url,
-                    });
-                  });
-                }}
-                variant="outline"
-                className="sm:w-auto h-auto py-3"
-              >
-                <Share2 className="mr-2 h-5 w-5" />
-                Share this report
               </Button>
             </div>
 
