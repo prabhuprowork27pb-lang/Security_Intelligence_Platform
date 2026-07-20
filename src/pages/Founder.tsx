@@ -151,9 +151,15 @@ const Founder = () => (
                 Founder, {BRAND.platformTm}
               </p>
               <div className="mt-2.5 pt-2.5 border-t border-border/40">
-                <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground/90 leading-relaxed">
-                  IIRIS Consulting · Google India · G4S · Dept. of Atomic Energy · Indian Army
-                </p>
+                <a
+                  href={LINKEDIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Linkedin className="h-3.5 w-3.5 text-secondary" />
+                  <span>in/captprabhu27punjab</span>
+                </a>
               </div>
             </div>
           </div>
