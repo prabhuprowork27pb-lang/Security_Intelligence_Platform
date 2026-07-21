@@ -180,7 +180,13 @@ const Trust = () => {
               maze, no canned replies.
             </p>
             <a
-              href="mailto:trust@securityintelplatform.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=prabhuprowork27pb@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                window.open("https://mail.google.com/mail/?view=cm&fs=1&to=prabhuprowork27pb@gmail.com", "_blank");
+              }}
               className="inline-flex items-center gap-2 text-primary font-semibold hover:underline"
             >
               trust@securityintelplatform.com

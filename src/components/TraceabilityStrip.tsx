@@ -23,7 +23,7 @@ export const TraceabilityStrip = () => {
     {
       icon: BookOpen,
       label: "Standard",
-      body: "ISO 18788 · ISO 22301 · ISO 31000 · NIA · PSARA · DGR.",
+      body: "ISO 18788 · ISO 22301 · ISO 31000 · PSARA.",
     },
   ];
 

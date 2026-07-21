@@ -106,7 +106,12 @@ const AdminAnalyticsTab = () => {
                 <CartesianGrid stroke="hsl(var(--border))" vertical={false} />
                 <XAxis dataKey="band" tickLine={false} axisLine={false} />
                 <YAxis allowDecimals={false} tickLine={false} axisLine={false} />
-                <Tooltip cursor={{ fill: "hsl(var(--muted))" }} contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8 }} />
+                <Tooltip 
+                  cursor={{ fill: "hsl(var(--muted))" }} 
+                  contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, color: "hsl(var(--card-foreground))" }} 
+                  itemStyle={{ color: "hsl(var(--card-foreground))" }}
+                  labelStyle={{ color: "hsl(var(--card-foreground))", fontWeight: "600" }}
+                />
                 <Bar dataKey="count" radius={[6, 6, 0, 0]}>
                   {scoreDistribution.map((entry, index) => (
                     <Cell key={entry.band} fill={scoreColors[index]} />

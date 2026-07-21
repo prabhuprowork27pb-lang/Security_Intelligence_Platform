@@ -167,7 +167,7 @@ const Founder = () => (
       </div>
 
       {/* Credibility chips */}
-      <div className="flex flex-wrap gap-2 mt-10">
+      {/* <div className="flex flex-wrap gap-2 mt-10">
         {[
           "23 yrs in security operations",
           "Ex-VP, IIRIS Consulting",
@@ -183,7 +183,7 @@ const Founder = () => (
             {chip}
           </span>
         ))}
-      </div>
+      </div> */}
     </section>
 
     {/* Bio + Why SIP */}

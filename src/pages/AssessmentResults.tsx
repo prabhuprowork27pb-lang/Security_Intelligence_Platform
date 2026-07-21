@@ -577,8 +577,17 @@ const AssessmentResults = () => {
                       contentStyle={{
                         backgroundColor: "hsl(var(--card))",
                         border: "1px solid hsl(var(--border))",
-                        borderRadius: "8px"
+                        borderRadius: "8px",
+                        color: "hsl(var(--card-foreground))"
                       }}
+                      itemStyle={{
+                        color: "hsl(var(--card-foreground))"
+                      }}
+                      labelStyle={{
+                        color: "hsl(var(--card-foreground))",
+                        fontWeight: "600"
+                      }}
+                      formatter={(value: any) => [value, "Score"]}
                     />
                     <Bar dataKey="score_0_100" radius={[8, 8, 0, 0]}>
                       {domainScores.map((entry, index) => {
@@ -612,8 +621,17 @@ const AssessmentResults = () => {
                       contentStyle={{
                         backgroundColor: "hsl(var(--card))",
                         border: "1px solid hsl(var(--border))",
-                        borderRadius: "8px"
+                        borderRadius: "8px",
+                        color: "hsl(var(--card-foreground))"
                       }}
+                      itemStyle={{
+                        color: "hsl(var(--card-foreground))"
+                      }}
+                      labelStyle={{
+                        color: "hsl(var(--card-foreground))",
+                        fontWeight: "600"
+                      }}
+                      formatter={(value: any) => [value, "Maturity Level"]}
                     />
                   </RadarChart>
                 </ResponsiveContainer>
