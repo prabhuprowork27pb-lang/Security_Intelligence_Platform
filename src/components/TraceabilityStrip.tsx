@@ -65,7 +65,7 @@ export const TraceabilityStrip = () => {
           ))}
         </div>
 
-        <div className="mt-8 pt-6 border-t border-border/40">
+        {/* <div className="mt-8 pt-6 border-t border-border/40">
           <Link
             to="/trust#standards"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-secondary hover:text-secondary/80 transition-colors"
@@ -73,7 +73,7 @@ export const TraceabilityStrip = () => {
             See the standards we map to
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
-        </div>
+        </div> */}
       </div>
     </section>
   );

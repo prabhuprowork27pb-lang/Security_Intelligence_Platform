@@ -434,7 +434,7 @@ const Auth = () => {
           <CardDescription>Sign in to access your assessments</CardDescription>
         </CardHeader>
         <CardContent>
-          <Button
+          {/* <Button
             type="button"
             variant="outline"
             className="w-full mb-4"
@@ -449,7 +449,7 @@ const Auth = () => {
                 Continue with Google
               </>
             )}
-          </Button>
+          </Button> */}
 
           <div className="relative my-4">
             <Separator />
