@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getDomainIcon } from "@/lib/domainIcons";
 import { SCALE_LABELS } from "@/lib/questions";
-import { getScoreBand, SAASS_SCORE_BANDS } from "@/lib/scoring";
+import { getScoreBand, SAASS_SCORE_BANDS, sanitizeReportText } from "@/lib/scoring";
 import { computeRiskDimensionScores } from "@/lib/riskDimensions";
 import { ScoreBadge } from "@/components/ScoreBadge";
 import ReportDisclaimerRibbon from "@/components/ReportDisclaimerRibbon";
@@ -233,7 +233,8 @@ export default function PrintPreview() {
         let signatureFinding: string | null = null;
         try {
           const parsed = JSON.parse(assessment.remediation_plan || "{}");
-          signatureFinding = parsed.signature_finding ?? null;
+          const rawSig = parsed.signature_finding ?? null;
+          signatureFinding = rawSig ? sanitizeReportText(rawSig, assessment.overall_score_0_100) : null;
         } catch { /* ignore */ }
         if (!signatureFinding) return null;
         return (
@@ -255,7 +256,7 @@ export default function PrintPreview() {
         <div className="p-8 page-break-inside-avoid">
           <h2 className="text-2xl font-heading font-bold text-primary mb-4">Executive Summary</h2>
           <Card className="p-6">
-            <p className="whitespace-pre-wrap">{assessment.executive_summary}</p>
+            <p className="whitespace-pre-wrap">{sanitizeReportText(assessment.executive_summary, assessment.overall_score_0_100)}</p>
           </Card>
         </div>
       )}

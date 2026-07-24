@@ -87,6 +87,23 @@ export function getScoreBand(score: number | null | undefined): ScoreBand | null
 }
 
 /**
+ * Sanitizes report text (signature finding / executive summary) to fix legacy 'Ad Hoc'
+ * band text mismatches when the score is actually high (e.g. 100 / Resilient).
+ */
+export function sanitizeReportText(text: string | null | undefined, score: number | null | undefined): string {
+  if (!text) return '';
+  if (score === null || score === undefined || isNaN(score)) return text;
+
+  const correctBand = getScoreBand(score)?.label;
+  if (!correctBand || correctBand === 'Ad Hoc') return text;
+
+  return text
+    .replace(/Overall posture is Ad Hoc/g, `Overall posture is ${correctBand}`)
+    .replace(/placing the site in the "Ad Hoc" band/g, `placing the site in the "${correctBand}" band`)
+    .replace(/placing the site in the 'Ad Hoc' band/g, `placing the site in the "${correctBand}" band`);
+}
+
+/**
  * Get label and color for a score - convenience function
  */
 export function scoreToLabelAndColor(score: number | null | undefined): {

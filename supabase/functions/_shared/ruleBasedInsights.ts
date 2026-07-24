@@ -60,8 +60,12 @@ const BANDS = [
   { id: 'proactive', label: 'Resilient', min: 86, max: 100 },
 ] as const;
 
-function bandFor(score: number) {
-  return BANDS.find(b => score >= b.min && score <= b.max) ?? BANDS[0];
+function bandFor(score: number | undefined | null) {
+  if (score === undefined || score === null || isNaN(Number(score))) {
+    return BANDS[0];
+  }
+  const clamped = Math.max(0, Math.min(100, Number(score)));
+  return BANDS.find(b => clamped >= b.min && clamped <= b.max) ?? BANDS[BANDS.length - 1];
 }
 
 const MANAGED_THRESHOLD = 71;
@@ -300,8 +304,14 @@ function buildExecutiveSummary(
   strongDomains: DomainScoreInput[],
 ): string {
   const siteName = site.site_name || 'This site';
-  const overallScore = Math.round(site.overall_score_0_100);
-  const overallBand = bandFor(site.overall_score_0_100).label;
+  const avgDomainScore = _domainScores.length > 0
+    ? _domainScores.reduce((sum, d) => sum + d.score_0_100, 0) / _domainScores.length
+    : 0;
+  const validScore = (typeof site?.overall_score_0_100 === 'number' && !isNaN(site.overall_score_0_100))
+    ? site.overall_score_0_100
+    : avgDomainScore;
+  const overallScore = Math.min(100, Math.max(0, Math.round(validScore)));
+  const overallBand = bandFor(validScore).label;
 
   const para1 = `${siteName} achieves an overall security score of ${overallScore}/100, placing the site in the "${overallBand}" band with an overall risk posture of ${site.risk_posture}. This assessment covers ten domains spanning physical, procedural, and statutory security controls, weighted by relative criticality to derive the overall score.`;
 
@@ -371,7 +381,13 @@ export function buildRuleBasedInsights(domainScores: DomainScoreInput[], site: S
   const sorted = [...domainScores].sort((a, b) => a.score_0_100 - b.score_0_100);
   const weakDomains = sorted.filter(d => d.score_0_100 < MANAGED_THRESHOLD).slice(0, 3);
   const strongDomains = [...sorted].reverse().filter(d => d.score_0_100 >= MANAGED_THRESHOLD).slice(0, 3);
-  const overallBand = bandFor(site.overall_score_0_100).label;
+  const avgDomainScore = domainScores.length > 0
+    ? domainScores.reduce((sum, d) => sum + d.score_0_100, 0) / domainScores.length
+    : 0;
+  const validOverallScore = (typeof site?.overall_score_0_100 === 'number' && !isNaN(site.overall_score_0_100))
+    ? site.overall_score_0_100
+    : avgDomainScore;
+  const overallBand = bandFor(validOverallScore).label;
   const roadmap = buildRoadmap(weakDomains, domainScores);
 
   return {

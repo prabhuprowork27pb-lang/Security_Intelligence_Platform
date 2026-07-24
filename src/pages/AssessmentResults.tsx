@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 import { ArrowLeft, Sparkles, FileText, MessageSquare, AlertTriangle, Home, BookOpen, Clock, CheckCircle2, Loader2 } from "lucide-react";
-import { getScoreBand, SAASS_SCORE_BANDS } from "@/lib/scoring";
+import { getScoreBand, SAASS_SCORE_BANDS, sanitizeReportText } from "@/lib/scoring";
 import { ScoreBadge } from "@/components/ScoreBadge";
 import { getDomainIcon } from "@/lib/domainIcons";
 import { DslrLeadForm } from "@/components/DslrLeadForm";
@@ -109,7 +109,8 @@ const AssessmentResults = () => {
       // Parse the AI intelligence payload from remediation_plan (stored as JSON string)
       try {
         const parsed = JSON.parse(assessmentRes.data.remediation_plan || "{}");
-        setSignatureFinding(parsed.signature_finding ?? null);
+        const rawSig = parsed.signature_finding ?? null;
+        setSignatureFinding(rawSig ? sanitizeReportText(rawSig, assessmentRes.data.overall_score_0_100) : null);
         setDetectedPatterns(Array.isArray(parsed.detected_patterns) ? parsed.detected_patterns : []);
         const weak = Array.isArray(parsed.weak_domains) ? parsed.weak_domains : [];
         setWeakDomainFindings(
@@ -496,7 +497,7 @@ const AssessmentResults = () => {
                   What This Means For Your Site
                 </h2>
                 <div className="prose prose-sm max-w-none">
-                  <p className="text-foreground leading-relaxed whitespace-pre-wrap">{assessment.executive_summary}</p>
+                  <p className="text-foreground leading-relaxed whitespace-pre-wrap">{sanitizeReportText(assessment.executive_summary, assessment.overall_score_0_100)}</p>
                 </div>
               </Card>
             ) : (
